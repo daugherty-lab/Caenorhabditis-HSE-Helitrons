@@ -1,5 +1,6 @@
 # Caenorhabditis-HSE-Helitrons
 HSE-Helitron overlap analyses by bvtsu for Garrigues et al., 2019
+https://elifesciences.org/articles/51139
 
 Heat Shock elements (HSEs) in this project are shorthand for the Hsf-1 binding motif.
 Published work demonstrates that mobile elements known as helitrons transport HSEs around Caenorhabditis genomes, and has the potential to rewire transcription regulatory networks.
