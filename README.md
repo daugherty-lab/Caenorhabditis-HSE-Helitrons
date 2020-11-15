@@ -3,14 +3,17 @@ HSE-Helitron overlap analyses by bvtsu for Garrigues et al., 2019
 Early analyses by Garrigues (Pasquinelli) demonstrated: 
 1. Enrichment of HSEs inside C. elegans helitrons
 2. Large HSE peaks in helitrons
+
 ![HSE-Helitrons-in-C_elegans-genome](C_elegans_HSE_Helitron_peaks.png)
 
 Follow-up analyses by bvtsu (Daugherty) addressed:
 1. Does enrichment of HSEs inside helitrons (red fraction) extend to other Caenorhabditis species?
+
 ![HSE-Helitrons-in-CGP-genomes](CGP_black_red.png)
 Published work with CGP genomes suggest that other Caenorhabditis species have this signature.
 
 2. Does enrichment of HSEs inside helitrons (red fraction) extend outside of Caenorhabditis species?
+
 ![HSE-Helitrons-in-UCSC-genomes](ucsc_black_red.png)
 Published work with UCSC genomes suggest that this is specific to Caenorhabditis.
 
