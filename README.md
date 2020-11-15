@@ -17,6 +17,7 @@ Published work with UCSC genomes suggest that this is specific to Caenorhabditis
 However, extension of this work into i5k insect genomes suggests this phenomenon may exist in mosquitoes (Figure not shown - See Table 1 in i5k folder). Follow-up work has been done by bryantcao (see repo: mosquito-transcriptomics)
 
 3. In non-Caenorhabditis species, do we see large HSE peaks (indicative of movement by uncalled helitrons or other mobile elements)?
+Similar response as with 2. More conclusive data will come from mosquito genome analyses by bryantcao.
 
 ## Dependencies
 ### 1. RepeatMasker (via conda)
