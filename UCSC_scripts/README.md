@@ -19,5 +19,5 @@
 
 ```bash submit_hsepileup.sh``` 
 ### 6. Visualize overlap of HSEs and Helitrons across phylogenies
-### 7. Run pybedtools to test for signifance of overlap using fisher exact test
-### Extra: Tajima's D on C. briggs VCF.
+### 7. Run test for signifance of overlap using fisher exact test (Missing: see pair_helitron_hses.ipynb in HSE_project_CGP)
+### Extra: Tajima's D on C. briggs VCF (TajimasD.ipynb in notebooks).
