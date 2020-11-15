@@ -1,4 +1,4 @@
-## Usage
+## Usage (REVISED 11-15-2020 BUT UNTESTED)
 ### 1. Create working code directory in TSCC
 ```mkdir /home/tscc-user/code/helitron.hses/```
 ### 2. go to the UCSC assembly listing, https://genome.ucsc.edu/FAQ/FAQreleases.html and pull the species names associated with the most recent assemblies and paste into textfile named UCSC_planfile.txt (Example: hg38 is the most recent human genome release, 11-25-2020)
