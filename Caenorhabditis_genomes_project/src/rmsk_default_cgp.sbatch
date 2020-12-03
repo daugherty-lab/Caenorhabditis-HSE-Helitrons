@@ -13,13 +13,13 @@ if [ -e /home/bvtsu/data/fimo_cgp_default/${INDEX}_fimo.tsv ]
 then
     echo "Already processed."
 else
-    gzip -d /home/bvtsu/ref_genome/CGP/${INDEX}.fa.gz
+    gzip -d /home/bvtsu/genomes/${INDEX}.fa.gz
     start=$SECONDS
     
-    fasta-get-markov /home/bvtsu/ref_genome/CGP/${INDEX}.fa /home/bvtsu/ref_genome/CGP/${INDEX}_bg.txt &
+    fasta-get-markov /home/bvtsu/genomes/${INDEX}.fa /home/bvtsu/genomes/${INDEX}_bg.txt &
     wait $! 
     
-    fimo --oc /home/bvtsu/data/fimo_cgp_default/${INDEX}/ --bfile /home/bvtsu/ref_genome/CGP/${INDEX}_bg.txt --verbosity 1 --max-stored-scores 80000000 --motif RGAADNTTCTAGAAR /home/bvtsu/code/helitron.hses.012019/HSF1meme_final.txt /home/bvtsu/ref_genome/CGP/${INDEX}.fa &
+    fimo --oc /home/bvtsu/data/fimo_cgp_default/${INDEX}/ --bfile /home/bvtsu/genomes/${INDEX}_bg.txt --verbosity 1 --max-stored-scores 80000000 --motif RGAADNTTCTAGAAR /home/bvtsu/subproject/HSF1meme_final.txt /home/bvtsu/genomes/${INDEX}.fa &
 
     wait $!
 
@@ -30,6 +30,6 @@ else
 fi
 
 
-#RepeatMasker -s -pa 8 -lib /home/bvtsu/code/helitron.hses/caeHelitrons_final.fa -nolow -norna -gff -no_is -xsmall -dir /home/bvtsu/data/rmsk.out.cgp/ /home/bvtsu/ref_genome/CGP/${INDEX}.fa
+RepeatMasker -s -pa 8 -lib /home/bvtsu/subproject/caeHelitrons_final.fa -nolow -norna -gff -no_is -xsmall -dir /home/bvtsu/data/rmsk.out.cgp/ /home/bvtsu/genomes/${INDEX}.fa
 
-gzip /home/bvtsu/ref_genome/CGP/${INDEX}.fa
+gzip /home/bvtsu/genomes/${INDEX}.fa
