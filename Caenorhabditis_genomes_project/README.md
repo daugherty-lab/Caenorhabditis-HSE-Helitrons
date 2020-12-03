@@ -14,6 +14,9 @@ Published work with CGP genomes suggest that other Caenorhabditis species have t
 ```conda install -c bioconda repeatmasker```
 
 ### 2. FIMO (MEME Suite package)
+Install all of MEME suite via this guide: http://meme-suite.org/doc/install.html?man_type=web
+Edit: For step 3 of the installation, edit ~/.bash_profile to include the following (Assuming you installed it to your main directory)
+```export PATH=$HOME/meme/bin:$HOME/meme/libexec/meme-5.3.0:$PATH```
 
 ## Usage:
 #### 1. Visit http://download.caenorhabditis.org/v1/sequence/
@@ -45,24 +48,28 @@ Published work with CGP genomes suggest that other Caenorhabditis species have t
 
 Using any text editor, replace "bvtsu" with your own tscc username in the submit_rmsk_cgp.sh file. (Example: vim)
 ```vim submit_rmsk_cgp.sh``` #open vim editor
+
 ```:%s/bvtsu/yourusername/g``` #Hit enter
+
 ```:wq``` #Save changes
 
 #### 8. Navigate to the src folder and edit the rmsk_default_cgp.sbatch file
 ```cd src```
 
 ```vim rmsk_default_cgp.sbatch``` #open vim editor
+
 ```:%s/bvtsu/yourusername/g``` #Hit enter
+
 ```:wq``` #Save changes
 
-#### 9. Return to subproject and execute "submit_rmsk_cgp.sh
+#### 9. Return to subproject and execute "submit_rmsk_cgp.sh"
 ```cd ..```
 
 ```chmod +x submit_rmsk_cgp.sh```
 
 ```./submit_rmsk_cgp.sh``` 
 
-#### 8. Execute the "submit_hse_helitron_counter.sh".
+#### 10. Execute the "submit_hse_helitron_counter.sh". [INCOMPLETE]
 ```./submit_hse_helitron_counter.sh``` 
 
-#### 9. Your output should now have a summary table of fractions of HSEs inside or outside of helitrons.
+#### 11. Your output should now have a summary table of fractions of HSEs inside or outside of helitrons.
