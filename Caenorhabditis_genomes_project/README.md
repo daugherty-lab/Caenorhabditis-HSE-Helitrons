@@ -41,7 +41,7 @@ Edit: For step 3 of the installation, edit ~/.bash_profile to include the follow
 ```mkdir ~/subproject/log/```
 #### 6. Navigate to your genomes folder and create a file from your directory list of "scaffolds.fa.gz" files.
 ```cd ~/genomes```
-```ls | rev | cut -d . -f 2- | rev > ~/subproject/CGP_planfile.txt```
+```ls | grep scaffolds | rev | cut -d . -f 3- | rev > ~/subproject/CGP_planfile.txt```
 
 #### 7. Navigate to the subproject folder and edit the bash script "submit_rmsk_cgp.sh"
 ```cd ~/subproject/```
