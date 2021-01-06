@@ -69,7 +69,7 @@ Using any text editor, replace "bvtsu" with your own tscc username in the submit
 
 ```./submit_rmsk_cgp.sh``` 
 
-#### 10. Execute the "submit_hse_helitron_counter.sh". [INCOMPLETE]
+#### 10. Execute the "submit_hse_helitron_counter.sh". [Currently in progress]
 ```./submit_hse_helitron_counter.sh``` 
 
 #### 11. Your output should now have a summary table of fractions of HSEs inside or outside of helitrons.
