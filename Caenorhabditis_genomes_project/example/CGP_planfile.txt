@@ -1,0 +1,2 @@
+Caenorhabditis_angaria_PS1010_PRJNA51225.scaffolds
+Caenorhabditis_brenneri_C_brenneri-6.0.1b.scaffolds
