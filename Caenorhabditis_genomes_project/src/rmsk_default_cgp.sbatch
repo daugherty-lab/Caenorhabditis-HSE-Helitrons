@@ -8,28 +8,33 @@
 #PBS -V
 #PBS -M bvtsu@ucsd.edu
 
+motif_dataDIR=/home/bvtsu/fimo_cgp_default/
+rmsk_dataDIR=/home/bvtsu/data/rmsk.out.cgp/
+genomeDIR=/home/bvtsu/genomes/
+caeHelitronDIR=/home/bvtsu/Caenorhabditis-HSE-Helitrons/Caenorhabditis_genomes_project/
 
-if [ -e /home/bvtsu/data/fimo_cgp_default/${INDEX}_fimo.tsv ]
+if [ -e ${motif_dataDIR}${INDEX}_fimo.tsv ]
 then
     echo "Already processed."
 else
-    gzip -d /home/bvtsu/genomes/${INDEX}.fa.gz
+    gzip -d ${genomeDIR}${INDEX}.fa.gz
     start=$SECONDS
     
-    fasta-get-markov /home/bvtsu/genomes/${INDEX}.fa /home/bvtsu/genomes/${INDEX}_bg.txt &
+    fasta-get-markov ${genomeDIR}${INDEX}.fa ${genomeDIR}${INDEX}_bg.txt &
     wait $! 
     
-    fimo --oc /home/bvtsu/data/fimo_cgp_default/${INDEX}/ --bfile /home/bvtsu/genomes/${INDEX}_bg.txt --verbosity 1 --max-stored-scores 80000000 --motif RGAADNTTCTAGAAR /home/bvtsu/subproject/HSF1meme_final.txt /home/bvtsu/genomes/${INDEX}.fa &
+    fimo --oc ${motif_dataDIR}${INDEX}/ --bfile ${genomeDIR}${INDEX}_bg.txt --verbosity 1 --max-stored-scores 80000000 --motif RGAADNTTCTAGAAR HSF1meme_final.txt ${genomeDIR}${INDEX}.fa &
 
     wait $!
 
     echo Job exited with status $?
     duration=$(( SECONDS - start ))
     echo "Completed in $duration seconds"
-    mv /home/bvtsu/data/fimo_cgp_default/${INDEX}/fimo.tsv /home/bvtsu/data/fimo_cgp_default/${INDEX}/${INDEX}_fimo.tsv
+    mkdir ${motif_dataDIR}${INDEX}/ 
+    mv ${motif_dataDIR}${INDEX}/fimo.tsv ${motif_dataDIR}${INDEX}/${INDEX}_fimo.tsv
 fi
 
 
-RepeatMasker -s -pa 8 -lib /home/bvtsu/subproject/caeHelitrons_final.fa -nolow -norna -gff -no_is -xsmall -dir /home/bvtsu/data/rmsk.out.cgp/ /home/bvtsu/genomes/${INDEX}.fa
+RepeatMasker -s -pa 8 -lib ${caeHelitronDIR}caeHelitrons_final.fa -nolow -norna -gff -no_is -xsmall -dir ${rmsk_dataDIR} ${genomeDIR}${INDEX}.fa
 
-gzip /home/bvtsu/genomes/${INDEX}.fa
+gzip ${genomeDIR}${INDEX}.fa
