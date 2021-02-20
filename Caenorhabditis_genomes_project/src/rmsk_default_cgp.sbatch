@@ -8,7 +8,7 @@
 #PBS -V
 #PBS -M bvtsu@ucsd.edu
 
-motif_dataDIR=/home/bvtsu/fimo_cgp_default/
+motif_dataDIR=/home/bvtsu/data/fimo_cgp_default/
 rmsk_dataDIR=/home/bvtsu/data/rmsk.out.cgp/
 genomeDIR=/home/bvtsu/genomes/
 caeHelitronDIR=/home/bvtsu/Caenorhabditis-HSE-Helitrons/Caenorhabditis_genomes_project/
@@ -23,7 +23,7 @@ else
     fasta-get-markov ${genomeDIR}${INDEX}.fa ${genomeDIR}${INDEX}_bg.txt &
     wait $! 
     
-    fimo --oc ${motif_dataDIR}${INDEX}/ --bfile ${genomeDIR}${INDEX}_bg.txt --verbosity 1 --max-stored-scores 80000000 --motif RGAADNTTCTAGAAR HSF1meme_final.txt ${genomeDIR}${INDEX}.fa &
+    fimo --oc ${motif_dataDIR}${INDEX}/ --bfile ${genomeDIR}${INDEX}_bg.txt --verbosity 1 --max-stored-scores 80000000 --motif RGAADNTTCTAGAAR ${caeHelitronDIR}HSF1meme_final.txt ${genomeDIR}${INDEX}.fa &
 
     wait $!
 
