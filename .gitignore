@@ -3,3 +3,4 @@ Caenorhabditis_genomes_project/log/
 
 #Jupyter notebooks and other
 *.ipynb
+*.code-workspace
