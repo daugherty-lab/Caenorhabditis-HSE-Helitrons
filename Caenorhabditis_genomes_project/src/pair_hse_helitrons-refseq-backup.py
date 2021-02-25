@@ -16,7 +16,6 @@ import statistics
 from statistics import mean
 import csv
 
-infolder=sys.argv[1]
 organism=sys.argv[2]
 outfolder=sys.argv[3]
 
@@ -36,11 +35,11 @@ def merge_overlaps(sorted_by_lower_bound):
                 merged.append(higher)
     return(merged)
 
-def HSE_Helitron_counter(mainfolder_in,organism_dir,mainfolder_out):
-    limitless_fimo = pd.read_csv('{}fimo_cgp_default/{}/{}_fimo.tsv'.format(mainfolder_in,organism_dir,organism_dir), sep='\t', comment='#').sort_values(['sequence_name', 'start'], ascending=[True, True]);
+def HSE_Helitron_counter(mainfolder_out,organism_dir):
+    limitless_fimo = pd.read_csv('refseq_motif_files/{}_genomic.fna.motif.tsv'.format(sys.argv[1]), sep='\t', comment='#').sort_values(['sequence_name', 'start'], ascending=[True, True]);
     limitless_fimo = limitless_fimo.drop_duplicates(subset = ['sequence_name','start','stop'])
     limitless_fimo.to_csv('{}{}_extendedFIMO.txt'.format(mainfolder_out,organism_dir))
-    with open('{}rmsk.out.cgp/{}.fa.ori.out'.format(mainfolder_in,organism_dir)) as f:
+    with open('rmsk.out.refseq/{}_genomic.fna.ori.out'.format(sys.argv[1])) as f:
         helitron_input = f.readlines()
     helitron_file = pd.DataFrame([i.split()[0:10] for i in helitron_input])[[4,5,6,8,9]]
     helitron_file.columns = ['genoName','genoStart','genoEnd','strand','repName']
@@ -69,8 +68,8 @@ def HSE_Helitron_counter(mainfolder_in,organism_dir,mainfolder_out):
     summary_df.sort_values('#name').to_csv('{}{}_Helitrons.HSEs.summary.txt'.format(mainfolder_out,organism_dir))
 
 def summarize_coverage(mainfolder_out,organism_dir):
-    helitron_file = pd.read_csv('{}{}_helitron_HSEs.txt'.format(mainfolder_out,organism_dir))[['genoName','genoStart','genoEnd']];
-    limitless_fimo = pd.read_csv('{}{}_extendedFIMO.txt'.format(mainfolder_out,organism_dir))[['sequence_name','start','stop']];
+    helitron_file = pd.read_csv('{}{}_helitron_HSEs.txt'.format(mainfolder,organism_dir))[['genoName','genoStart','genoEnd']];
+    limitless_fimo = pd.read_csv('{}{}_extendedFIMO.txt'.format(mainfolder,organism_dir))[['sequence_name','start','stop']];
     try:
         num_HSEs_in_heli = []
         merged_coordinates_heli = []
@@ -106,9 +105,9 @@ def summarize_coverage(mainfolder_out,organism_dir):
         genome_coverage_heli = 0
         genome_coverage_hse = 0
         sum_num_HSEs_in_heli = 0
-    return("summarize_coverage:",len(helitron_file),merged_coordinates_heli,len(limitless_fimo),merged_coordinates_hse,genome_coverage_heli,genome_coverage_hse,sum_num_HSEs_in_heli)
+    return(len(helitron_file),merged_coordinates_heli,len(limitless_fimo),merged_coordinates_hse,genome_coverage_heli,genome_coverage_hse,sum_num_HSEs_in_heli)
 
-def full_organism_summary(mainfolder_in,organism_dir,mainfolder_out):
+def full_organism_summary(mainfolder_out,summary_cov_path,organism_dir):
     my_futurefile = Path('{}{}_Helitrons.HSEs.summary.txt'.format(mainfolder_out,organism_dir))
     if my_futurefile.is_file():
         summary_final = pd.read_csv(my_futurefile)[['#name','number.w.HSEs','number.total','fraction.w.HSEs','grouped.number.total.HSEs']]
@@ -120,13 +119,13 @@ def full_organism_summary(mainfolder_in,organism_dir,mainfolder_out):
                 limitless_fimo_final = pd.read_csv('{}{}_extendedFIMO.txt'.format(mainfolder_out,organism_dir), sep=',');
                 #print("test")
                 summary_sizes_heli_HSE = pd.read_csv('{}{}'.format(mainfolder_out,summary_cov_path),sep='\t')
-                HSEs_in_merged_heli = sum_num_HSEs_in_heli#summary_sizes_heli_HSE[summary_sizes_heli_HSE['Assembly'] == organism_dir]['num.HSEs.in.merged_overlapping.heli'].values[0]
-                total_merged_heli = len(merged_coordinates_heli)#Don't know if this will work #summary_sizes_heli_HSE[summary_sizes_heli_HSE['Assembly'] == organism_dir]['Total.Helitrons.merged_overlap'].values[0]
-                total_heli_bases = genome_coverage_heli#summary_sizes_heli_HSE[summary_sizes_heli_HSE['Assembly'] == organism_dir]['Helitrons.merged_overlaps.bases'].values[0]
-                total_hse_bases = genome_coverage_hse#summary_sizes_heli_HSE[summary_sizes_heli_HSE['Assembly'] == organism_dir]['HSEs.merged_overlaps.bases'].values[0]
+                HSEs_in_merged_heli = summary_sizes_heli_HSE[summary_sizes_heli_HSE['Assembly'] == organism_dir]['num.HSEs.in.merged_overlapping.heli'].values[0]
+                total_merged_heli = summary_sizes_heli_HSE[summary_sizes_heli_HSE['Assembly'] == organism_dir]['Total.Helitrons.merged_overlap'].values[0]
+                total_heli_bases = summary_sizes_heli_HSE[summary_sizes_heli_HSE['Assembly'] == organism_dir]['Helitrons.merged_overlaps.bases'].values[0]
+                total_hse_bases = summary_sizes_heli_HSE[summary_sizes_heli_HSE['Assembly'] == organism_dir]['HSEs.merged_overlaps.bases'].values[0]
                 #chrom_sizes = pd.read_csv('{}{}.chrom.sizes'.format(mainfolder,organism_dir,organism_dir), sep='\t', header = None);
                 #print("test")
-                genome_size = int(open('{}rmsk.out.cgp/{}.fa.tbl'.format(mainfolder_in,organism_dir)).readlines()[3].split()[2])#chrom_sizes[[1]].values.sum()
+                genome_size = int(open('{}{}.fa.repeatmasker.tbl'.format(mainfolder,organism_dir)).readlines()[3].split()[2])#chrom_sizes[[1]].values.sum()
                 #print(genome_size)
                 org_name = organism_dir.split('.')[0]#conversion_table.loc[conversion_table['Assembly']==organism_dir, 'Common'].values[0];
                 org_assembly = organism_dir.split('.')[1]
@@ -153,9 +152,6 @@ def full_organism_summary(mainfolder_in,organism_dir,mainfolder_out):
                 genome_size=0
                 ratio_hse_genome=0
                 ratio_heli_genome=0
-            
-            return("final_summary:",org_name,org_assembly,summary_final_sum,HSEs_in_merged_heli,hses_notin_mergedheli,total_hses,ratio_hses_in_mergedheli_to_total,ratio_hses_outside_to_total,total_helis,total_merged_heli,total_hse_bases,total_heli_bases,genome_size,ratio_hse_genome,ratio_heli_genome)
+            return(org_name,org_assembly,summary_final_sum,HSEs_in_merged_heli,hses_notin_mergedheli,total_hses,ratio_hses_in_mergedheli_to_total,ratio_hses_outside_to_total,total_helis,total_merged_heli,total_hse_bases,total_heli_bases,genome_size,ratio_hse_genome,ratio_heli_genome)
 
-HSE_Helitron_counter(infolder,organism,outfolder)
-summarize_coverage(outfolder,organism)
-full_organism_summary(infolder,organism,outfolder)
+HSE_Helitron_counter(outfolder,organism)
