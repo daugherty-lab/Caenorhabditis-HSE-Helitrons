@@ -16,9 +16,10 @@ while read l; do #start a while loop to read the line (l) as a string
         echo "already processed" #don't need to re-create existing data
     else
         echo "nok"
-        qsub  -V -N ${INDEX} \ #qsub queues the affiliated command to TSCC
-            -o log/hsehelitron-"${INDEX}".out \ #make log for terminal stdout
-            -e log/hsehelitron-"${INDEX}".err \ #make log for terminal stderr
-            src/hse_helitron.sbatch #call src script to analyze hse-helitron pairs
+        #queues the affiliated command to TSCC, make log for stdout and stderr
+        qsub  -V -N ${INDEX} \
+                -o log/hse_heli-${INDEX}.out \
+                -e log/hse_heli-${INDEX}.err \
+                src/hse_helitron.sbatch #call src script to analyze hse-helitron pairs
     fi
 done < $PLANFILE #This calls the defined planfile above to be used for the entire while loop
