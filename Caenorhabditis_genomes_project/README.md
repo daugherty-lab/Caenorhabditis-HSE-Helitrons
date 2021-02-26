@@ -1,6 +1,10 @@
 # Caenorhabditis-HSE-Helitrons
 HSE-Helitron overlap analyses by bvtsu for Garrigues et al., 2019
 
+Migration Goals (Intended for use on TSCC/Triton Shared Computing Cluster):
+-Analysis of CGP genomes (Early March)
+-Analysis of UCSC genomes (End of March)
+
 ## This work addresses the following:
 ### 1. Does enrichment of HSEs inside helitrons (red fraction) extend to other Caenorhabditis species?
 
