@@ -1,6 +1,9 @@
 # Caenorhabditis-HSE-Helitrons
 HSE-Helitron overlap analyses by bvtsu for Garrigues et al., 2019
 
+Planned major revision (By early March):
+Current TSCC version was tested using MEME motif and rmsk -- Published version identifies HSE motifs using a regular expression search for the degenerate HSE motif, NGAANNTTCNNGAAN, and the helitron genome coordinates via UCSC- and CGP-provided RepeatMasker files (containing keyword ‘helitron’).
+
 ## This work addresses the following:
 ### 1. Does enrichment of HSEs inside helitrons (red fraction) extend to other Caenorhabditis species?
 

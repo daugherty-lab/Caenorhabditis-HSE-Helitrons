@@ -13,8 +13,8 @@ while read l; do #start a while loop to read the line (l) as a string
     #genome_accession=${wget_url##*/}
     if [ -e ${outfolder}${INDEX}_extendedFIMO.txt ] #check specified data folder location for existing outputs
     then
-        echo "already processed" #don't need to re-create existing data
-    else
+    #    echo "already processed" #don't need to re-create existing data
+    #else
         echo "nok"
         #queues the affiliated command to TSCC, make log for stdout and stderr
         qsub  -V -N ${INDEX} \

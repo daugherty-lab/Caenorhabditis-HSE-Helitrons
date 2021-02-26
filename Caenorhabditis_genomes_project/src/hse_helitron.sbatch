@@ -2,7 +2,7 @@
 #PBS -q hotel
 #PBS -N rmsk
 #PBS -l nodes=1:ppn=1
-#PBS -l walltime=4:00:00
+#PBS -l walltime=1:00:00
 #PBS -o hse-heli.sh.out
 #PBS -e hse-heli.sh.err
 #PBS -V
