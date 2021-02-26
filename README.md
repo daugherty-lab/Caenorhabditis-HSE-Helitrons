@@ -5,6 +5,10 @@ https://elifesciences.org/articles/51139
 Heat Shock elements (HSEs) in this project are shorthand for the Hsf-1 binding motif.
 Published work demonstrates that mobile elements known as helitrons transport HSEs around Caenorhabditis genomes, and has the potential to rewire transcription regulatory networks.
 
+Migration Goals (Intended for use on TSCC/Triton Shared Computing Cluster):
+-Analysis of CGP genomes (Early March)
+-Analysis of UCSC genomes (End of March), currently unsorted
+
 ## Early analyses by Garrigues (Pasquinelli) demonstrated: 
 ### 1. Enrichment of HSEs inside C. elegans helitrons (Note: These early values are based off of the MEME motif, rather than the later-adopted regex motif search).
 ### 2. Large HSE peaks in helitrons

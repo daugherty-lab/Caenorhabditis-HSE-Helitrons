@@ -1,10 +1,6 @@
 # Caenorhabditis-HSE-Helitrons
 HSE-Helitron overlap analyses by bvtsu for Garrigues et al., 2019
 
-Migration Goals (Intended for use on TSCC/Triton Shared Computing Cluster):
--Analysis of CGP genomes (Early March)
--Analysis of UCSC genomes (End of March)
-
 ## This work addresses the following:
 ### 1. Does enrichment of HSEs inside helitrons (red fraction) extend to other Caenorhabditis species?
 
@@ -29,10 +25,20 @@ Edit: For step 3 of the installation, edit ~/.bash_profile to include the follow
 ```scp ~/Folder-With-Genomes/*.scaffolds.fa.gz username@tscc-login.sdsc.edu:~/genomes```
 #### 4. Log into TSCC and enter your university Active Directory password when prompted.
 ```ssh username@tscc-login.sdsc.edu```
+
+Alternative to Steps 1-4:
+#### Log into TSCC and enter your university Active Directory password when prompted.
+```ssh username@tscc-login.sdsc.edu```
+#### Use wget in your desired genome folder
+```mkdir genomes```
+
+```cd genome```
+
+```wget -r --no-parent -A '*.scaffolds.fa.gz' http://download.caenorhabditis.org/v1/sequence/```
+
 #### 5. Create a working folder/git clone the repository of interest and relevant datafolders for outputs
 
 ```git clone https://github.com/daugherty-lab/Caenorhabditis-HSE-Helitrons/ subproject/```
-#You will be prompted for your github credentials, as this is a private repo
 
 ```cd subproject```
 
