@@ -6,7 +6,6 @@ from timeit import default_timer as timer
 
 #print("The arguments are: " , str(sys.argv))
 filename = str(sys.argv[1])
-outfolder = str(sys.argv[2])
 typeof_file = filename.split(".")[-1]
 #outtype = str(sys.argv[2])
 if typeof_file == "2bit":
@@ -40,7 +39,7 @@ with open(filename, 'r') as origfasta:
             appended_piece.append(pieces.strip())
     final = "".join(appended_piece)
     fasta.append(final)
-    with open("{}{}.motif.tsv".format(outfolder,filename.split("/")[-1]), 'w') as new_fasta:
+    with open("/home/bvtsu/data/i5k_motif_files/{}.motif.tsv".format(filename.split("/")[-1]), 'w') as new_fasta:
         motif_id = "motif_id"
         hit_num = 0
         sequence_name = "sequence_name"

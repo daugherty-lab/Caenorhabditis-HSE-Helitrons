@@ -3,18 +3,27 @@
 # This script submits jobs to the cluster to run pair_hse_helitrons.py on each input line from PLANFILE
 
 #Assign your planfile to the PLANFILE variable
-export PLANFILE=example/CGP_planfile.txt #planfile exists in example folder, but there must be a newline at the end for this to read each line
+#export PLANFILE=example/CGP_planfile.txt #planfile exists in example folder, but there must be a newline at the end for this to read each line
+export PLANFILE=example/CGP_planfile_full.txt
 outfolder=/home/bvtsu/data/CGP_out/
+
+if [ -e ${outfolder} ] #check specified data folder location for existing outputs
+then
+    echo "outfolder exists" #don't need to re-create existing data
+else
+    echo "nok"
+    mkdir ${outfolder}
+fi
 
 while read l; do #start a while loop to read the line (l) as a string
     export INDEX=${l} #store string into variable INDEX
     echo ${INDEX} #print the stored string
     #wget_url=$(grep "${INDEX}" assembly_summary_refseq.txt | grep -v virus | sort -rnk13 | head -n 1 | cut -f20)
     #genome_accession=${wget_url##*/}
-    if [ -e ${outfolder}${INDEX}_extendedFIMO.txt ] #check specified data folder location for existing outputs
+    if [ -e ${outfolder}${INDEX}_final_summary.txt ] #check specified data folder location for existing outputs
     then
-    #    echo "already processed" #don't need to re-create existing data
-    #else
+        echo "already processed" #don't need to re-create existing data
+    else
         echo "nok"
         #queues the affiliated command to TSCC, make log for stdout and stderr
         qsub  -V -N ${INDEX} \

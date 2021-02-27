@@ -37,11 +37,11 @@ def merge_overlaps(sorted_by_lower_bound):
     return(merged)
 
 def HSE_Helitron_counter(mainfolder_in,organism_dir,mainfolder_out):
-    limitless_fimo = pd.read_csv('{}fimo_cgp_default/{}/{}_fimo.tsv'.format(mainfolder_in,organism_dir,organism_dir), sep='\t', comment='#').sort_values(['sequence_name', 'start'], ascending=[True, True]);
+    limitless_fimo = pd.read_csv('{}regex_cgp_default/{}.fa.motif.tsv'.format(mainfolder_in,organism_dir,organism_dir), sep='\t').sort_values(['sequence_name', 'start'], ascending=[True, True]);
     limitless_fimo = limitless_fimo.drop_duplicates(subset = ['sequence_name','start','stop'])
     limitless_fimo.to_csv('{}{}_extendedFIMO.txt'.format(mainfolder_out,organism_dir))
-    with open('{}rmsk.out.cgp/{}.fa.ori.out'.format(mainfolder_in,organism_dir)) as f:
-        helitron_input = f.readlines()
+    with open('{}rmsk.out.cgp/download.caenorhabditis.org/v1/repeatmasker/{}.fa.repeatmasker.out'.format(mainfolder_in,organism_dir)) as f:
+        helitron_input = f.readlines()[3:]
     helitron_file = pd.DataFrame([i.split()[0:10] for i in helitron_input])[[4,5,6,8,9]]
     helitron_file.columns = ['genoName','genoStart','genoEnd','strand','repName']
     helitron_file.repName.str.lower()
@@ -112,7 +112,7 @@ def summarize_coverage(mainfolder_in,organism_dir,mainfolder_out):
         total_hse_bases = genome_coverage_hse#summary_sizes_heli_HSE[summary_sizes_heli_HSE['Assembly'] == organism_dir]['HSEs.merged_overlaps.bases'].values[0]
         #chrom_sizes = pd.read_csv('{}{}.chrom.sizes'.format(mainfolder,organism_dir,organism_dir), sep='\t', header = None);
         print("test2")
-        genome_size = int(open('{}rmsk.out.cgp/{}.fa.tbl'.format(mainfolder_in,organism_dir)).readlines()[3].split()[2])#chrom_sizes[[1]].values.sum()
+        genome_size = int(open('{}rmsk.out.cgp/download.caenorhabditis.org/v1/repeatmasker/{}.fa.repeatmasker.tbl'.format(mainfolder_in,organism_dir)).readlines()[3].split()[2])#chrom_sizes[[1]].values.sum()
         print(genome_size)
         org_name = organism_dir.split('.')[0]#conversion_table.loc[conversion_table['Assembly']==organism_dir, 'Common'].values[0];
         org_assembly = organism_dir.split('.')[1]
@@ -134,9 +134,9 @@ def summarize_coverage(mainfolder_in,organism_dir,mainfolder_out):
         return("Failed")
 
 
-#HSE_Helitron_counter(infolder,organism,outfolder)
+HSE_Helitron_counter(infolder,organism,outfolder)
 final_summary=summarize_coverage(infolder,organism,outfolder)
 print(final_summary)
 with open('{}{}_final_summary.txt'.format(outfolder,organism),'w') as summary_file:
-    for i in range(len(final_summary)):
+    for i in final_summary:
         summary_file.write('{},'.format(str(i)))

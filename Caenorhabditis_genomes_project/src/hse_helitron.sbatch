@@ -10,19 +10,19 @@
 
 infolder=/home/bvtsu/data/
 outfolder=/home/bvtsu/data/CGP_out/
-
+pypath=/home/bvtsu/Caenorhabditis-HSE-Helitrons/Caenorhabditis_genomes_project/src/
+rmskDIR=/home/bvtsu/data/rmsk.out.cgp/download.caenorhabditis.org/v1/repeatmasker/
 ###What is this doing here? wget_url=$(grep "${INDEX}" assembly_summary_refseq.txt | grep -v virus | sort -rnk13 | head -n 1 | cut -f20)
 #genome_accession=${wget_url##*/}
 #echo ${INDEX//[[:blank:]]/}
 echo ${INDEX}
 #echo ${genome_accession} 
-if [ -e ${outfolder} ] #check specified data folder location for existing outputs
-then
-    echo "outfolder exists" #don't need to re-create existing data
-else
-    echo "nok"
-    mkdir ${outfolder}
-fi
-python /home/bvtsu/Caenorhabditis-HSE-Helitrons/Caenorhabditis_genomes_project/src/pair_hse_helitrons.py ${infolder} ${INDEX} ${outfolder} &
+
+gzip -d ${rmskDIR}${INDEX}.fa.repeatmasker.out.gz
+gzip -d ${rmskDIR}${INDEX}.fa.repeatmasker.tbl.gz
+
+python ${pypath}pair_hse_helitrons.py ${infolder} ${INDEX} ${outfolder} &
 wait $!
 echo Job exited with status $?
+gzip ${rmskDIR}${INDEX}.fa.repeatmasker.out
+gzip ${rmskDIR}${INDEX}.fa.repeatmasker.tbl

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script submits jobs to the cluster to run RepeatMasker on each input line from PLANFILE
+# This script submits jobs to the cluster to run HSE-Helitron counter on each input line from PLANFILE
 
 #export PLANFILE=/home/bvtsu/code/helitron.hses/refseq_metazoans_planfile.txt 
 export PLANFILE=refseq_metazoans_planfile.txt
