@@ -1,4 +1,10 @@
-#size_summary.write('Assembly\tTotal.Helitrons\tTotal.Helitrons.merged_overlap\tTotal.HSEs\tTotal.HSEs.merged_overlap\tHelitrons.merged_overlaps.bases\tHSEs.merged_overlaps.bases\tnum.HSEs.in.merged_overlapping.heli\n')
+#!/usr/bin/env python
+
+import argparse
+import numpy as np
+import pandas as pd 
+
+from pathlib import Path
 
 conversion_table =  pd.read_csv("/Users/briantsu/Public/notebooks/HSE_project/assembly_conversion_list.txt");
 organism_list = ['cb3']
@@ -34,4 +40,6 @@ with open('{}HSE_in_out_summary.txt'.format(mainfolder), 'w') as HSE_in_out_summ
                                                                  total_heli_bases,
                                                                  total_hse_bases/genome_size,
                                                                  total_heli_bases/genome_size))
-#summary_df
+
+if __name__ == '__main__':
+    main()
