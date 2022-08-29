@@ -1,7 +1,7 @@
 # Caenorhabditis-HSE-Helitrons
 This reposiory is a series of HSE-Helitron overlap analyses created by bvtsu for [Garrigues et al., 2019](https://elifesciences.org/articles/51139). This HPC pipeline is controlled by `bash` commands to take a list of UCSC Genome Browser database-specific genome names (e.g. ce11 for Caenorhabditis elegans via UCSC) and uses them to create unique `Torque` jobs and run scripts and pre-built software contained in the `src/` directory.
 
-![HSE-Helitrons-in-UCSC-genomes](ucsc_black_red.png)
+![HSE-Helitrons-in-UCSC-genomes](img/ucsc_black_red.png)
 Published work with UCSC genomes suggest that this is specific to Caenorhabditis.
 
 # In progress/planned
