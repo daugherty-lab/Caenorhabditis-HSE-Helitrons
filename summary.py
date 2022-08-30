@@ -66,7 +66,7 @@ def summarize_coverage(mainfolder_out,organism_dir):
         genome_coverage_heli = 0
         genome_coverage_hse = 0
         sum_num_HSEs_in_heli = 0
-    return(len(limitless_fimo)-1,genome_coverage_heli,genome_coverage_hse,sum_num_HSEs_in_heli,genome_size)
+    return(len(limitless_fimo),genome_coverage_heli,genome_coverage_hse,sum_num_HSEs_in_heli,genome_size)
 
 def main():
     args = parse_args()
